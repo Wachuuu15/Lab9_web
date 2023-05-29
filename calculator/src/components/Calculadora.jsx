@@ -12,6 +12,7 @@ function Calculator() {
   const [isNegative, setIsNegative] = useState(false);
 
 
+
   const inputNum = (e) => {
     if (curState.length >= 9) return; //se ignora
   
@@ -19,6 +20,7 @@ function Calculator() {
   
     if (total) {
       setPreState("");
+
     }
   
     setCurState((prevState) => {
@@ -36,7 +38,8 @@ function Calculator() {
 
   useEffect(() => {
     setInput(curState || "0");
-    }, []);
+  }, [curState]);
+  
 
   const operatorType = (e) => {
     setTotal(false);
@@ -83,23 +86,23 @@ function Calculator() {
     setInput("");
     setPreState(Cal);
     setCurState("");
+
   };
   
   const minusPlus = () => {
     if (curState === "0") return;
-
+  
     setCurState((prevState) => {
       let newState;
       if (prevState.charAt(0) === "-") {
         newState = prevState.substring(1);
-        setIsNegative(false); // Actualizar el valor de isNegative
       } else {
         newState = "-" + prevState;
-        setIsNegative(true); // Actualizar el valor de isNegative
       }
       return newState;
     });
   };
+  
    
   useEffect(() => {
     console.log("Después del cambio de signo:", curState);
@@ -119,10 +122,11 @@ function Calculator() {
     setCurState("");
     setInput("0");
     setIsNegative(false); // Agregar esta línea
-
+    
   };
   
   return (
+    
     <div className="Calculator-base">
       <div className="wrapper">
         <div className="screen">
@@ -205,6 +209,8 @@ function Calculator() {
           =
         </div>
       </div>
+
+
     </div>
   );
 }
